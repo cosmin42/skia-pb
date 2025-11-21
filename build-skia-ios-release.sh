@@ -33,4 +33,12 @@ mkdir -p ios-release/include
 cp -R third_party/skia/include ios-release/include/
 cp -R third_party/skia/modules ios-release/include/
 cp -R third_party/skia/src ios-release/include/
+echo "Creating zip archive ios-release/skia-ios-release.zip containing include/ and lib/..."
+if command -v zip >/dev/null 2>&1; then
+    (cd ios-release && zip -r skia-ios-release.zip include lib)
+    echo "Created archive: ios-release/skia-ios-release.zip"
+else
+    echo "Warning: 'zip' command not found; skipping archive creation."
+fi
+
 echo "Skia iOS release build completed successfully."
